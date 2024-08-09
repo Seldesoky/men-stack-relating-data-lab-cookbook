@@ -6,18 +6,14 @@
   <title>Home Page</title>
 </head>
 <body>
+  <%- include('./partials/_navbar.ejs') %>
+  
+  <h1>Welcome to CookBook</h1>
+
   <% if (user) { %>
-    <h1>Welcome to the app, <%= user.username %>!</h1>
-    <p>
-      <a href="/auth/sign-out">Sign out</a>
-    </p>
+    <h2>Welcome back, <%= user.username %>!</h2>
   <% } else { %>
-    <h1>Welcome to the app, guest.</h1>
-    <p>
-      <a href="/auth/sign-up">Sign up</a> or
-      <a href="/auth/sign-in">Sign in</a>.
-    </p>
+    <h2>Welcome to CookBook, please sign in or sign up to start managing your recipes.</h2>
   <% } %>
-  <p><a href="/vip-lounge">Get into the VIP Users Only lounge!</a></p>
 </body>
 </html>

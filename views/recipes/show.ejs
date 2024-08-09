@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= recipe.name %></title>
+  <style>
+    .recipe-actions a {
+      margin-right: 10px;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .recipe-actions a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1><%= recipe.name %></h1>
+
+  <h2>Instructions:</h2>
+  <p><%= recipe.instructions %></p>
+
+  <h2>Ingredients:</h2>
+  <ul>
+    <% recipe.ingredients.forEach(ingredient => { %>
+      <li><%= ingredient.name %></li>
+    <% }) %>
+  </ul>
+
+  <div class="recipe-actions">
+    <a href="/recipes/<%= recipe._id %>/edit">Edit Recipe</a>
+    <a href="#" onclick="deleteRecipe()">Delete Recipe</a>
+    <a href="/recipes">Back to Recipes</a>
+  </div>
+
+  <form id="delete-form" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST" style="display: none;">
+  </form>
+
+  <script>
+    function deleteRecipe() {
+      if (confirm('Are you sure you want to delete this recipe?')) {
+        document.getElementById('delete-form').submit();
+      }
+    }
+  </script>
+</body>
+</html>

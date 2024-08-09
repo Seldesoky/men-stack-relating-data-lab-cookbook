@@ -1,0 +1,25 @@
+<!-- views/partials/_navbar.ejs -->
+
+<nav style="background-color: #333; padding: 10px;">
+    <ul style="list-style-type: none; margin: 0; padding: 0; overflow: hidden;">
+      <li style="float: left; margin-right: 15px;">
+        <a href="/" style="color: white; text-decoration: none; padding: 14px 16px; display: block;">Home</a>
+      </li>
+      <% if (user) { %>
+        <li style="float: left; margin-right: 15px;">
+          <a href="/recipes" style="color: white; text-decoration: none; padding: 14px 16px; display: block;">View My Recipes</a>
+        </li>
+        <li style="float: left; margin-right: 15px;">
+          <a href="/auth/sign-out" style="color: white; text-decoration: none; padding: 14px 16px; display: block;">Sign Out</a>
+        </li>
+      <% } else { %>
+        <li style="float: left; margin-right: 15px;">
+          <a href="/auth/sign-in" style="color: white; text-decoration: none; padding: 14px 16px; display: block;">Sign In</a>
+        </li>
+        <li style="float: left; margin-right: 15px;">
+          <a href="/auth/sign-up" style="color: white; text-decoration: none; padding: 14px 16px; display: block;">Sign Up</a>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
+  
