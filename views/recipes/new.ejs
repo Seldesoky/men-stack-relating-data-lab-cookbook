@@ -4,19 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add New Recipe</title>
+  <style>
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .form-group label {
+      margin-right: 10px;
+    }
+
+    .ingredient-options {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
   <h1>Add a New Recipe</h1>
 
   <form action="/recipes" method="POST">
-    <label for="name">Recipe Name:</label>
-    <input type="text" id="name" name="name" required>
+    <div class="form-group">
+      <label for="name">Recipe Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
 
-    <label for="instructions">Instructions:</label>
-    <textarea id="instructions" name="instructions"></textarea>
+    <div class="form-group">
+      <label for="instructions">Instructions:</label>
+      <textarea id="instructions" name="instructions"></textarea>
+    </div>
 
+    <div class="form-group">
+      <label>Ingredients:</label>
+      <div class="ingredient-options">
+        <% ingredients.forEach(ingredient => { %>
+          <div>
+            <input type="checkbox" id="ingredient-<%= ingredient._id %>" name="ingredients" value="<%= ingredient._id %>">
+            <label for="ingredient-<%= ingredient._id %>"><%= ingredient.name %></label>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <h3>Add a New Ingredient</h3>
+    <div id="newIngredientsContainer">
+      <input type="text" name="newIngredients[]" placeholder="Ingredient Name" style="display: block; margin-bottom: 5px;">
+    </div>
+    <button type="button" onclick="addNewIngredientField()">Add Another Ingredient</button>
+
+    <br><br>
     <button type="submit">Create Recipe</button>
   </form>
+
+  <a href="/recipes">Back to Recipes</a>
+
+  <script>
+    function addNewIngredientField() {
+      const container = document.getElementById('newIngredientsContainer');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = 'newIngredients[]';
+      input.placeholder = 'Ingredient Name';
+      input.style.display = 'block';
+      input.style.marginBottom = '5px';
+      container.appendChild(input);
+    }
+  </script>
 </body>
 </html>

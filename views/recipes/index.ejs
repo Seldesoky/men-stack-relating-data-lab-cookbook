@@ -7,11 +7,13 @@
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1>Welcome to My Recipes</h1>
+  <% if (success === 'true') { %>
+    <div style="color: green; font-weight: bold;">
+      Recipe successfully saved!
+    </div>
+  <% } %>
 
-  <a href="/recipes/new">Add New Recipe</a>
-
-  <% if (recipes.length > 0) { %>
+  <h1>Welcome to My Recipes</h1><% if (recipes.length > 0) { %>
     <ul>
       <% recipes.forEach(recipe => { %>
         <li><a href="/recipes/<%= recipe._id %>"><%= recipe.name %></a></li>
@@ -20,5 +22,7 @@
   <% } else { %>
     <p>You have not created any recipes yet.</p>
   <% } %>
+  
+  <a href="/recipes/new">Add a New Recipe</a>
 </body>
 </html>

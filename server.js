@@ -13,6 +13,7 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 const authController = require('./controllers/auth.js');
 const recipeController = require('./controllers/recipes.js');
 const ingredientController = require('./controllers/ingredients.js');
+const usersController = require('./controllers/users.js');
 
 const port = process.env.PORT || 3000;
 
@@ -35,11 +36,12 @@ app.use(session({
 app.use(passUserToView);
 
 // Routes
-app.use('/auth', authController); 
-app.use(isSignedIn); 
+app.use('/auth', authController);
+app.use(isSignedIn);
 
-app.use('/recipes', recipeController); 
-app.use('/ingredients', ingredientController); 
+app.use('/recipes', recipeController);
+app.use('/ingredients', ingredientController);
+app.use('/users', usersController);
 
 // Default route
 app.get('/', (req, res) => {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingredient Manager</title>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1>Your Ingredients</h1>
+  <h2>All Ingredients</h2>
+  <ul>
+    <% ingredients.forEach(ingredient => { %>
+      <li><%= ingredient.name %></li>
+    <% }) %>
+  </ul>
+
+  <h2>Unused Ingredients</h2>
+  <ul>
+    <% if (unusedIngredients.length > 0) { %>
+      <% unusedIngredients.forEach(ingredient => { %>
+        <li><%= ingredient.name %></li>
+      <% }) %>
+    <% } else { %>
+      <p>All ingredients are used in recipes.</p>
+    <% } %>
+  </ul>
+
+  <h2>Add a New Ingredient</h2>
+  <form action="/ingredients" method="POST">
+    <label for="name">Ingredient Name:</label>
+    <input type="text" id="name" name="name" required>
+    <button type="submit">Add Ingredient</button>
+  </form>
+</body>
+</html>

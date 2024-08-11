@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Recipe</title>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1>Edit Recipe</h1>
+
+  <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+    <div>
+      <label for="name">Recipe Name:</label>
+      <input type="text" id="name" name="name" value="<%= recipe.name %>" required>
+    </div>
+
+    <div>
+      <label for="instructions">Instructions:</label>
+      <textarea id="instructions" name="instructions"><%= recipe.instructions %></textarea>
+    </div>
+
+    <div>
+      <label>Ingredients:</label>
+      <div>
+        <% ingredients.forEach(ingredient => { %>
+          <div>
+            <input 
+              type="checkbox" 
+              id="ingredient-<%= ingredient._id %>" 
+              name="ingredients" 
+              value="<%= ingredient._id %>" 
+              <%= recipe.ingredients.some(ing => ing._id.equals(ingredient._id)) ? 'checked' : '' %>>
+            <label for="ingredient-<%= ingredient._id %>"><%= ingredient.name %></label>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+    <br><br>
+    <button type="submit">Update Recipe</button>
+  </form>
+
+  <a href="/recipes">Back to Recipes</a>
+
+  <script>
+    function addNewIngredientField() {
+      const container = document.getElementById('newIngredientsContainer');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = 'newIngredients[]';
+      input.placeholder = 'Ingredient Name';
+      input.style.display = 'block';
+      input.style.marginBottom = '5px';
+      container.appendChild(input);
+    }
+  </script>
+</body>
+</html>
